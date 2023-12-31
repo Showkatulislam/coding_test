@@ -13,14 +13,24 @@ const MyModal = ({ show, handleClose, type, handleShow }) => {
       .then((data) => {
         setContacts(data.results)
       })
-  }, []);
+      let filterdata;
+      if(type==='B'){
+       filterdata=Contacts.filter(contact=>contact.country.name="United States")
+       if(isChecked){
+        filterdata=Contacts.filter(contact=>contact.id%2==0)
+       }
+       setShowContacts(filterdata)
 
-  if(type==='B'){
-    setShowContacts(Contacts)
-  }else{
-    setShowContacts(Contacts)
-  }
+      }else{
+        if(isChecked){
+            filterdata=Contacts.filter(contact=>contact.id%2==0)
+            setShowContacts(filterdata)
+        }else{
+            setShowContacts(Contacts)
+        }
 
+      }
+  }, [type,isChecked,isChecked]);
 
 
   const handleCheckboxChange = () => {
